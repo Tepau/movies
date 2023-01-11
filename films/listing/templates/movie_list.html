@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <title>Liste des films</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            {% for movie in object_list %}
+            <div class="col-3 border">
+                    <img src={{ movie.cover.url }} class="img-fluid">
+                    <p>{{ movie.name }}</p>
+                    <i>{{ movie.date }}</i>
+            </div>
+            
+            {% endfor %}
+        </div>
+    </div>
+   
+    
+</body>
+</html>
