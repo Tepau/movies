@@ -1,24 +1,18 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-from django.views.generic import ListView
+from django.urls import reverse_lazy
 from .models import Movie
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django_filters.views import FilterView
+from .filters import MovieFilter
 
-def index(request):
-    return HttpResponse("Hello, world. You're at the polls index.")
 
-class MovieListView(ListView):
+class MovieListView(LoginRequiredMixin, FilterView):
+    login_url = reverse_lazy('connexion')
     model = Movie
     template_name = 'movie_list.html'
-
-    def get_queryset(self):
-        year = self.request.GET.get('year')
-        qs = super().get_queryset()
-        if year is not None:
-            return qs.filter(date__year=year)
-        return qs
+    filterset_class = MovieFilter
     
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
-        years = [movie.date.year for movie in Movie.objects.all()]
+        years = [movie.date.year for movie in self.get_queryset()]
         data['years'] = list(set(years))
         return data

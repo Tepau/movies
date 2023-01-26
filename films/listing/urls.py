@@ -1,9 +1,13 @@
 from django.urls import path
+from django.conf.urls.static import static
+from django.conf import settings
 
-from . import views
+from .views import MovieListView
 
+
+app_name = 'listing'
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('list/', views.MovieListView.as_view(), name='movie_list'),
-
+    path('', MovieListView.as_view(), name='movie-list'),
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

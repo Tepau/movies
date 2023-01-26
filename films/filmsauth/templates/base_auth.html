@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% block css %}<link rel="stylesheet" href="{% static 'filmsauth/css/style.css' %}">{% endblock %}
+    {% block title %}{% endblock %}
+</head>
+
+<body>
+    <div class="container-fluid">
+    {% block content %}
+    
+        <div class="accueil d-flex align-items-center justify-content-end">
+            <div class="formulaire p-3">
+                {% block formulaire%}{%endblock%}
+            </div>
+        </div>
+    {% endblock %}
+    </div>
+
+
+
+</body>
+
+</html>
